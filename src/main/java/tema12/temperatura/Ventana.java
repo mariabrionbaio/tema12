@@ -1,4 +1,4 @@
-package tema12;
+package tema12.temperatura;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
