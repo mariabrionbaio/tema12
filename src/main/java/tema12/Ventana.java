@@ -9,7 +9,8 @@ public class Ventana extends javax.swing.JFrame {
         this.setTitle("Conversor de temperaturas");
         initComponents();
         this.setBounds(2500, 200, 500, 400);
-        
+        rbCaF.setSelected(true);
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -44,10 +45,10 @@ public class Ventana extends javax.swing.JFrame {
         titulo.setText("CONVERSOR DE TEMPERATURAS:");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Temperatura Celsius");
+        jLabel1.setText("Temperatura en ºCelsius");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Temperatura Fahrenheit");
+        jLabel2.setText("Temperatura en ºFahrenheit");
 
         entradaDatos.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         entradaDatos.setMinimumSize(new java.awt.Dimension(1000, 22));
@@ -106,7 +107,7 @@ public class Ventana extends javax.swing.JFrame {
                             .addComponent(entradaDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(titulo))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,30 +135,27 @@ public class Ventana extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botConvertirActionPerformed
-        // TODO add your handling code here:
-        double celsius = Double.parseDouble(entradaDatos.getText());
-        double fahrenheit = (int)Math.round((celsius * 9 / 5 + 32) * 100) / 100d;
-        salidaDatos.setText(Double.toString(fahrenheit));
+        double valor = Double.parseDouble(entradaDatos.getText());
+        double result = 0;
+
+        if (rbCaF.isSelected()) {
+            result = (valor * 9 / 5) + 32;
+        } else if (rbFaC.isSelected()) {
+            result = (valor - 32) * 5 / 9;
+        }
+
+        salidaDatos.setText(String.format("%.2f", result));
     }//GEN-LAST:event_botConvertirActionPerformed
 
-   
-    private void rbCaFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCaFActionPerformed
-       String cels = jLabel1.getText();
-       String fah = jLabel2.getText();
-       
-       jLabel1.setText(cels);
-       jLabel2.setText(fah);
-        
-        botConvertirActionPerformed(evt);
-    }//GEN-LAST:event_rbCaFActionPerformed
-
     private void rbFaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFaCActionPerformed
-        String cels = jLabel1.getText();
-        String fah = jLabel2.getText();
-        
-        jLabel1.setText(fah);
-        jLabel2.setText(cels);
+        jLabel1.setText("Temperatura en ºFahrenheit");
+        jLabel2.setText("Temperatura en ºCelsius");
     }//GEN-LAST:event_rbFaCActionPerformed
+
+    private void rbCaFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCaFActionPerformed
+        jLabel1.setText("Temperatura en ºCelsius");
+        jLabel2.setText("Temperatura en ºFahrenheit");
+    }//GEN-LAST:event_rbCaFActionPerformed
 
     /**
      * @param args the command line arguments
